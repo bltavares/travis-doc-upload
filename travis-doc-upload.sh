@@ -11,8 +11,8 @@ set -e
 
 # Skip if not stable
 COMPILER_VERSION="$(rustc --version)"
-grep --quiet -v "beta" <<<$COMPILER_VERSION
-grep --quiet -v "nightly" <<<$COMPILER_VERSION
+echo $COMPILER_VERSION | grep --quiet -v "beta"
+echo $COMPILER_VERSION | grep --quiet -v "nightly"
 
 . ./scripts/travis-doc-upload.cfg
 
