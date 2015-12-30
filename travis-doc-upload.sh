@@ -7,11 +7,16 @@ set -e
 
 cargo doc
 
-. ./scripts/travis-doc-upload.cfg
-
 [ "$TRAVIS_BRANCH" = master ]
 
 [ "$TRAVIS_PULL_REQUEST" = false ]
+
+# Skip if not stable
+COMPILER_VERSION="$(rustc --version)"
+grep --quiet -v "beta" <<<$COMPILER_VERSION
+grep --quiet -v "nightly" <<<$COMPILER_VERSION
+
+. ./scripts/travis-doc-upload.cfg
 
 eval key=\$encrypted_${SSH_KEY_TRAVIS_ID}_key
 eval iv=\$encrypted_${SSH_KEY_TRAVIS_ID}_iv
