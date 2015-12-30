@@ -5,6 +5,8 @@
 
 set -e
 
+cargo doc
+
 . ./scripts/travis-doc-upload.cfg
 
 [ "$TRAVIS_BRANCH" = master ]
