@@ -5,8 +5,6 @@
 
 set -e
 
-cargo doc
-
 [ "$TRAVIS_BRANCH" = master ]
 
 [ "$TRAVIS_PULL_REQUEST" = false ]
@@ -26,6 +24,8 @@ openssl aes-256-cbc -K $key -iv $iv -in scripts/id_rsa.enc -out ~/.ssh/id_rsa -d
 chmod 600 ~/.ssh/id_rsa
 
 git clone --branch gh-pages git@github.com:$DOCS_REPO deploy_docs
+
+cargo doc
 
 cd deploy_docs
 git config user.name "doc upload bot"
